@@ -1,0 +1,111 @@
+import 'package:flutter/material.dart';
+import 'package:netmanapplication/Screens/Home/home_screen.dart';
+import 'package:netmanapplication/Screens/Market/market_screen.dart';
+import 'package:netmanapplication/Screens/Settings/settings_screen.dart';
+import 'package:netmanapplication/Screens/Tasking/tasking_screen.dart';
+import 'package:netmanapplication/Screens/Welcome/welcone_screen.dart';
+import 'package:netmanapplication/constants.dart';
+
+class LandingPage extends StatefulWidget {
+  const LandingPage({Key? key}) : super(key: key);
+
+  @override
+  _LandingPageState createState() => _LandingPageState();
+}
+
+class _LandingPageState extends State<LandingPage> {
+  int _bottomNavCurrentIndex = 0;
+  List<Widget> _container = [
+    new HomeScreen(),
+    new SettingScreen(),
+    new TaskingScreen(),
+    new MarketScreen()
+  ];
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: _container[_bottomNavCurrentIndex],
+      bottomNavigationBar: _buildBottomNavigation(),
+    );
+  }
+  Widget _buildBottomNavigation(){
+    return new BottomNavigationBar(
+      type: BottomNavigationBarType.fixed,
+      onTap: (index) {
+        switch (index){
+          case 0:
+          Navigator.pushNamed(context, '/homescreen');
+          break;
+          case 1:
+          Navigator.pushNamed(context, '/profile');
+          break;
+          case 2:
+          Navigator.pushNamed(context, '/task');
+          break;
+          case 3:
+          Navigator.pushNamed(context, '/setting');
+        }
+      },
+      currentIndex: _bottomNavCurrentIndex,
+      items: [
+        BottomNavigationBarItem(
+          activeIcon: new Icon(
+            Icons.home,
+            color: kPrimaryColor,
+          ),
+          icon: new Icon(
+            Icons.home,
+            color: Colors.grey,
+          ),
+          title: new Text(
+            'Beranda',
+          ),
+
+        ),
+        BottomNavigationBarItem(
+          activeIcon: new Icon(
+            Icons.store,
+            color: kPrimaryColor,
+          ),
+          icon: new Icon(
+            Icons.store,
+            color: Colors.grey,
+          ),
+          title: new Text(
+            'Market',
+          ),
+
+        ),
+        BottomNavigationBarItem(
+          activeIcon: new Icon(
+            Icons.business_center,
+            color: kPrimaryColor,
+          ),
+          icon: new Icon(
+            Icons.business_center,
+            color: Colors.grey,
+          ),
+          title: new Text(
+            'Task',
+          ),
+
+        ),
+        BottomNavigationBarItem(
+          activeIcon: new Icon(
+            Icons.settings,
+            color: kPrimaryColor,
+          ),
+          icon: new Icon(
+            Icons.settings,
+            color: Colors.grey,
+          ),
+          title: new Text(
+            'Setting',
+          ),
+
+        ),
+      ],
+    );
+  }
+}
